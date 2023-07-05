@@ -1,11 +1,14 @@
+# Imports section
 import time
 import pandas as pd
 import numpy as np
 import math as maths
 
+# pandas options configuration to control print of raw data table
 pd.set_option('display.max_columns', 20)
 pd.set_option('max_colwidth', 100)
 
+# dictionary to list available cities and data sources
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
