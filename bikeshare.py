@@ -1,11 +1,14 @@
+# Imports section
 import time
 import pandas as pd
 import numpy as np
 import math as math
 
+# pandas options configuration to control print of raw data table
 pd.set_option('display.max_columns', 20)
 pd.set_option('max_colwidth', 100)
 
+# dictionary to list available cities and data sources
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
@@ -23,11 +26,11 @@ def get_filters(city='washington', month='all', day='all'):
     valid_months = ('january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december', 'all')
     valid_days = ('monday','tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'all')
     print('\nHello! Let\'s explore some US bikeshare data!\n')
-        
+
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     city=''
     while city not in valid_cities:
-        print('You have to select one of the following cities: ' + str(valid_cities)) 
+        print('You have to select one of the following cities: ' + str(valid_cities))
         city = input('Please enter a city name you want to consult: ').lower()
     # get user input for month (all, january, february, ... , june)
     month = ''
@@ -40,7 +43,7 @@ def get_filters(city='washington', month='all', day='all'):
     while day not in valid_days:
         print('You have to select one of the following day values: ' + str(valid_days))
         day = input('Please enter a day of week you want to consult, or all for unfiltered data: ').lower()
-  
+
     print('-'*40)
     print('Your chosen data filters are : City ' + city + ', month: ' + month + ', day: ' + day)
     print('-'*40)
@@ -62,7 +65,7 @@ def load_data(city='washington', month='all', day='all'):
     df['month'] = df['start_time'].dt.month_name().str.lower()
     df['day_of_week'] = df['start_time'].dt.weekday_name.str.lower()
     df['hour'] = df['start_time'].dt.hour
-    
+
     if (month != 'all' and day != 'all'):
         print('\n--- Filtering ' + city + ' data by month: ' +  month + ' and by day of week: ' + day + ' ---\n')
         df = df.loc[df['month'] == month]
@@ -72,7 +75,7 @@ def load_data(city='washington', month='all', day='all'):
         df = df.loc[df['month'] == month]
     elif (month =='all' and day!='all'):
         print('\n--- Filtering ' + city + ' data by day of week: ' +  day + ' and considering all months ---\n')
-        df = df.loc[df['day_of_week'] == day]         
+        df = df.loc[df['day_of_week'] == day]
     else:
         print('\nAll days of the week on all months are considered for calculations\n')
 
@@ -112,7 +115,7 @@ def time_stats(df):
     print("\nMost common day of travel is: " + most_common_day)
     print("\nMost common hour for starting travel is: " + str(most_common_start_hour))
     print('-'*40)
-        
+
 def station_stats(df):
     """Displays statistics on the most popular stations and trip.
     Args:
@@ -133,14 +136,14 @@ def station_stats(df):
 
     # display most frequent combination of start station and end station trip
     most_common_start_end = df['start_end_combination'].mode()[0]
-        
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
     print("\nMost common start station is: " + most_common_start_station)
     print("\nMost common end station is: " + most_common_end_station)
     print("\nMost common trip is: " + most_common_start_end)
     print('-'*40)
-        
+
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration.
     Args:
@@ -181,7 +184,7 @@ def user_stats(df):
         gender_counts = df['Gender'].value_counts().rename_axis('Gender').reset_index(name='Count')
     else:
         gender_counts = '\nNo gender data available for this city\n'
-    print('-'*40)       
+    print('-'*40)
     print(gender_counts)
     print('-'*40)
 
@@ -216,9 +219,9 @@ def print_data(df):
         elif answer == 'yes':
             start = i
             finish = i + 5
-            print('Printing from ' + str(start) + ' to ' + str(finish) + ' data rows') 
+            print('Printing from ' + str(start) + ' to ' + str(finish) + ' data rows')
             print(df.iloc[start:finish])
-           
+
         elif answer == 'no':
             break
 
