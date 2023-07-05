@@ -5,7 +5,11 @@
 Bikeshare stats program
 
 ### Description
-Stats about bike share service of three American cities.
+Stats about bike share service of three American cities
+Cities included are:
+- Chicago
+- New York City
+- Washington
 
 ### Files used
 For the project I used as data input csv files with city data provided by Udacity.
